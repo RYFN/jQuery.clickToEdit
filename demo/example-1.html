@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Click To Edit Demo 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		.edit { display: none; }
+	</style>
+</head>
+<body>
+    <div class="click-to-edit">
+		<div class="display">
+		  <span data-name="Something">initial value</span>
+		  <span data-name="SomethingElse">some other value</span>
+		</div>
+		<form class="edit" action="/what/ever/" method="post">
+		  <input type="hidden" name="SomethingId"/>
+		  <input type="text" name="Something"/>
+		  <input type="text" name="SomethingElse"/>
+
+		  <button type="submit">update</button>
+		  <button type="button" class="cancel">cancel</button>
+		</form>
+	</div>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../jquery.clickToEdit.js"></script>
+	<script>
+		$(function(){
+			$('.click-to-edit').clickToEdit();
+		});
+	</script>
+</body>
+</html>
