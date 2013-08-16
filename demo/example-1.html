@@ -45,12 +45,36 @@
 		</form>
 	</div>
 	
+	<h2>Select dropdowns by text rather than value</h2>
+	 <div class="click-to-edit-selects">
+		<div class="display">
+		  <span data-name="Something">initial value</span>
+		  <span data-name="SomethingElse">some other value</span>
+		  <span data-name="AnotherThing">Value 1</span>
+		</div>
+		<form class="edit" action="/what/ever2/" method="post">
+		  <input type="hidden" name="SomethingId"/>
+		  <input type="text" name="Something"/>
+		  <input type="text" name="SomethingElse"/>
+		  <select name="AnotherThing">
+			<option value=""></option>
+			<option value="A">Value 1</option>
+			<option value="B">Value 2</option>
+			<option value="C">Value 3</option>
+		  </select>
+		  <button type="submit">update</button>
+		  <button type="button" class="cancel">cancel</button>
+		</form>
+	</div>
+	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="../jquery.clickToEdit.js"></script>
 	<script>
 		$(function(){
 			$('.click-to-edit').clickToEdit();
+			$('.click-to-edit-selects').clickToEdit({matchOptionsByText:true});
 		});
 	</script>
 </body>
 </html>
+

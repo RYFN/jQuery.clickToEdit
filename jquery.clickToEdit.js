@@ -12,6 +12,7 @@
             confirmRemove: null,
             postSuccess: null,
             postFail: null,
+			matchOptionsByText: false
         };
 
     // The actual plugin constructor
@@ -57,17 +58,42 @@
 	
 	ClickToEdit.prototype.editMode = function() {
 		this.display.hide();
-
+		var options = this.options;
 		if (this.displayHasChildren) {
 			var display = this.display;
-			this.edit.find('input,select').not('[type=hidden]').each(function (index, item) {
+			this.edit.find('input').not('[type=hidden]').each(function (index, item) {
 				var currentDisplay = display.find('[data-name=' + item.name + ']');
 				$(item).val(currentDisplay.text());
 			});
+			
+			this.edit.find('select').each(function (index, item) {
+				var currentDisplay = display.find('[data-name="' + item.name + '"]');
+				var currentItem = $(item);
+				if(options.matchOptionsByText){
+					var matchedOption = currentItem.find('option').filter(function(){
+						return $(this).text() === currentDisplay.text();
+					});
+					
+					currentItem.val(matchedOption.val());
+				}
+				else{
+					$(item).val(currentDisplay.text());
+				}
+			});
 		}
 		else {
-			var nameSelector = '[name="' + this.display.data('name') + '"]'
-			this.edit.find('input' + nameSelector + ',select' + nameSelector).val(this.display.text());
+			var nameSelector = '[name="' + this.display.data('name') + '"]';
+			this.edit.find('input' + nameSelector).val(this.display.text());
+			
+			if(options.matchOptionsByText){
+				var matchedOption = currentItem.find('option').filter(function(){
+						return $(this).text() === this.display.text();
+					});
+				this.edit.find('select' + nameSelector).val(matchedOption.val());
+			}
+			else {
+				this.edit.find('select' + nameSelector).val(this.display.text());
+			}
 		}
 
 		this.edit.show();
@@ -113,15 +139,34 @@
 	ClickToEdit.prototype.editSuccess = function(data) {
 		if (this.displayHasChildren) {
 			var display = this.display;
-			this.edit.find('input,select').not('[type=hidden]').each(function (index, item) {
+			var options = this.options;
+			this.edit.find('input').not('[type=hidden]').each(function (index, item) {
 				var currentDisplay = display.find('[data-name=' + item.name + ']');
-				this.currentDisplay.text($(item).val());
+				currentDisplay.text($(item).val());
+			});
+			
+			this.edit.find('select').each(function (index, item) {
+				var currentDisplay = display.find('[data-name=' + item.name + ']');
+				if(options.matchOptionsByText){
+					currentDisplay.text($(item).find('option:selected').text());
+				}
+				else
+				{
+					currentDisplay.text($(item).val());
+				}
 			});
 		}
 		else {
 			//display must contain only a single item
-			var currentVal = this.edit.find('input,select').not('[type=hidden]').first().val();
-			this.display.text(currentVal);
+			var editItem = this.edit.find('input,select').not('[type=hidden]').first();
+			
+			if(editItem.is('input') || (editItem.is('select') && !this.options.matchOptionsByText)) {
+				this.display.text(editItem.val());
+			}
+			else if(editItem.is('select') && this.options.matchOptionsByText){
+				var itemText = editItem.find('option:selected').text();
+				this.display.text(itemText);
+			}
 		}
 
 		this.edit.hide();
