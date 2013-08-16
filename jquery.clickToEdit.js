@@ -60,13 +60,14 @@
 
 		if (this.displayHasChildren) {
 			var display = this.display;
-			this.edit.find('input').not('[type=hidden]').each(function (index, item) {
+			this.edit.find('input,select').not('[type=hidden]').each(function (index, item) {
 				var currentDisplay = display.find('[data-name=' + item.name + ']');
 				$(item).val(currentDisplay.text());
 			});
 		}
 		else {
-			this.edit.find('input[name="' + this.display.data('name') + '"]').val(this.display.text());
+			var nameSelector = '[name="' + this.display.data('name') + '"]'
+			this.edit.find('input' + nameSelector + ',select' + nameSelector).val(this.display.text());
 		}
 
 		this.edit.show();
@@ -112,14 +113,14 @@
 	ClickToEdit.prototype.editSuccess = function(data) {
 		if (this.displayHasChildren) {
 			var display = this.display;
-			this.edit.find('input').not('[type=hidden]').each(function (index, item) {
+			this.edit.find('input,select').not('[type=hidden]').each(function (index, item) {
 				var currentDisplay = display.find('[data-name=' + item.name + ']');
 				this.currentDisplay.text($(item).val());
 			});
 		}
 		else {
 			//display must contain only a single item
-			var currentVal = this.edit.find('input').not('[type=hidden]').first().val();
+			var currentVal = this.edit.find('input,select').not('[type=hidden]').first().val();
 			this.display.text(currentVal);
 		}
 

@@ -8,16 +8,40 @@
 	</style>
 </head>
 <body>
-    <div class="click-to-edit">
-		<div class="display">
-		  <span data-name="Something">initial value</span>
-		  <span data-name="SomethingElse">some other value</span>
+	<h1>Basic examples</h2>
+	<p>Note that the form actions do not exist, and are just for illustration.</p>
+
+	<h2>Basic example</h2>
+	 <div class="click-to-edit">
+		<div class="display" data-name="Something">
+		  some value
 		</div>
 		<form class="edit" action="/what/ever/" method="post">
 		  <input type="hidden" name="SomethingId"/>
 		  <input type="text" name="Something"/>
-		  <input type="text" name="SomethingElse"/>
 
+		  <button type="submit">update</button>
+		  <button type="button" class="cancel">cancel</button>
+		</form>
+	</div>
+   	
+	<h2>Basic example 2</h2>
+	 <div class="click-to-edit">
+		<div class="display">
+		  <span data-name="Something">initial value</span>
+		  <span data-name="SomethingElse">some other value</span>
+		  <span data-name="AnotherThing">Value 1</span>
+		</div>
+		<form class="edit" action="/what/ever2/" method="post">
+		  <input type="hidden" name="SomethingId"/>
+		  <input type="text" name="Something"/>
+		  <input type="text" name="SomethingElse"/>
+		  <select name="AnotherThing">
+			<option value=""></option>
+			<option value="Value 1">Value 1</option>
+			<option value="Value 2">Value 2</option>
+			<option value="Value 3">Value 3</option>
+		  </select>
 		  <button type="submit">update</button>
 		  <button type="button" class="cancel">cancel</button>
 		</form>

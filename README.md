@@ -68,6 +68,5 @@ This works well with .Net MVC4 helper classes, and unobtrusive validation...
 
 
  
-TODO:
-    Refactor function placement, where should they go?
-    Add support for checkboxes/selects etc
+## TODO: ##
+Add support for showing select option text, as opposed to value in display label?
