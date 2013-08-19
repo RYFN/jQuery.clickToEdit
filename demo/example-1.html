@@ -1,78 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>jQuery Click To Edit Demo 1</title>
+    <title>jQuery click to edit demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="bootstrap.min.css" rel="stylesheet">
+	
 	<style>
 		.edit { display: none; }
+		.display { cursor: pointer; font-size:1.3em; }
+		.click-to-edit-delete form { float:left; }
 	</style>
 </head>
 <body>
-	<h1>Basic examples</h2>
-	<p>Note that the form actions do not exist, and are just for illustration.</p>
+	<div class="container">
+		<h1>Basic click to edit examples</h2>
+		<p>We're using <a href='https://github.com/appendto/jquery-mockjax' target='_blank'>jQuery Mockjax</a> in this demo to mock the ajax posts,
+		and <a href="http://getbootstrap.com/" target="_blank">bootstrap</a> for basic layout.
+		</p>
+		
+		<h2>Single editable field</h2>
+		 <div class="click-to-edit">
+			<div class="display" data-name="Something">some value</div>
+			<form class="edit" action="/dummy/url" method="post">
+			  <input type="hidden" name="SomethingId"/>
+			  <input type="text" name="Something"/>
 
-	<h2>Basic example</h2>
-	 <div class="click-to-edit">
-		<div class="display" data-name="Something">some value</div>
-		<form class="edit" action="/what/ever/" method="post">
-		  <input type="hidden" name="SomethingId"/>
-		  <input type="text" name="Something"/>
-
-		  <button type="submit">update</button>
-		  <button type="button" class="cancel">cancel</button>
-		</form>
-	</div>
-   	
-	<h2>Basic example 2</h2>
-	 <div class="click-to-edit">
-		<div class="display">
-		  <span data-name="Something">initial value</span>
-		  <span data-name="SomethingElse">some other value</span>
-		  <span data-name="AnotherThing">Value 1</span>
+			  <button type="submit">update</button>
+			  <button type="button" class="cancel">cancel</button>
+			</form>
 		</div>
-		<form class="edit" action="/what/ever2/" method="post">
-		  <input type="hidden" name="SomethingId"/>
-		  <input type="text" name="Something"/>
-		  <input type="text" name="SomethingElse"/>
-		  <select name="AnotherThing">
-			<option value=""></option>
-			<option value="Value 1">Value 1</option>
-			<option value="Value 2">Value 2</option>
-			<option value="Value 3">Value 3</option>
-		  </select>
-		  <button type="submit">update</button>
-		  <button type="button" class="cancel">cancel</button>
-		</form>
-	</div>
-	
-	<h2>Select dropdowns by text rather than value</h2>
-	 <div class="click-to-edit-selects">
-		<div class="display">
-		  <span data-name="Something">initial value</span>
-		  <span data-name="SomethingElse">some other value</span>
-		  <span data-name="AnotherThing">Value 1</span>
+		
+		<h2>Multiple editable fields</h2>
+		 <div class="click-to-edit">
+			<div class="display">
+			  <span data-name="Something">initial value</span>
+			  <span data-name="SomethingElse">some other value</span>
+			  <span data-name="AnotherThing">Value 1</span>
+			</div>
+			<form class="edit" action="/dummy/url" method="post">
+			  <input type="hidden" name="SomethingId"/>
+			  <input type="text" name="Something"/>
+			  <input type="text" name="SomethingElse"/>
+			  <select name="AnotherThing">
+				<option value=""></option>
+				<option value="Value 1">Value 1</option>
+				<option value="Value 2">Value 2</option>
+				<option value="Value 3">Value 3</option>
+			  </select>
+			  <button type="submit">update</button>
+			  <button type="button" class="cancel">cancel</button>
+			</form>
 		</div>
-		<form class="edit" action="/what/ever2/" method="post">
-		  <input type="hidden" name="SomethingId"/>
-		  <input type="text" name="Something"/>
-		  <input type="text" name="SomethingElse"/>
-		  <select name="AnotherThing">
-			<option value=""></option>
-			<option value="A">Value 1</option>
-			<option value="B">Value 2</option>
-			<option value="C">Value 3</option>
-		  </select>
-		  <button type="submit">update</button>
-		  <button type="button" class="cancel">cancel</button>
-		</form>
+		
+		<h2>Multiple fields again</h2>
+		<p>The select box in this example matches it's selected item on text, rather than value.</p>
+		 <div class="click-to-edit-selects">
+			<div class="display">
+			  <span data-name="Something">initial value</span>
+			  <span data-name="SomethingElse">some other value</span>
+			  <span data-name="AnotherThing">Value 1</span>
+			</div>
+			<form class="edit" action="/dummy/url" method="post">
+			  <input type="hidden" name="SomethingId"/>
+			  <input type="text" name="Something"/>
+			  <textarea name="SomethingElse"></textarea>
+			  <select name="AnotherThing">
+				<option value=""></option>
+				<option value="A">Value 1</option>
+				<option value="B">Value 2</option>
+				<option value="C">Value 3</option>
+			  </select>
+			  <button type="submit">update</button>
+			  <button type="button" class="cancel">cancel</button>
+			</form>
+		</div>
+		
+		<h2>Removing row on delete</h2>
+		 <div class="click-to-edit-delete">
+			<div class="display">
+			  <span data-name="Something">initial value</span>
+			  <span data-name="SomethingElse">some other value</span>
+			  <span data-name="AnotherThing">Value 1</span>
+			</div>
+			<div class="edit">
+				<form action="/dummy/url" method="post">
+				  <input type="hidden" name="SomethingId"/>
+				  <input type="text" name="Something"/>
+				  <input type="text" name="SomethingElse"/>
+				  <select name="AnotherThing">
+					<option value=""></option>
+					<option value="A">Value 1</option>
+					<option value="B">Value 2</option>
+					<option value="C">Value 3</option>
+				  </select>
+				  <button type="submit">update</button>
+				  <button type="button" class="cancel">cancel</button>
+				</form>
+				<form class="remove" action="/dummy/url" method="post">
+					<input type="hidden" name="SomethingId"/>
+					<button type="submit">delete</button>
+				</form>
+			</div>
+		</div>
+		
 	</div>
-	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="jquery.mockjax.js"></script>
     <script type="text/javascript" src="../jquery.clickToEdit.js"></script>
 	<script>
+		//set up ajax mock
+		$.mockjax({
+		  url: '*/dummy/url',
+		  contentType: 'text/json',
+		  responseText: {
+			status: 'success'
+		  }
+		});
+	
 		$(function(){
 			$('.click-to-edit').clickToEdit();
-			$('.click-to-edit-selects').clickToEdit({matchOptionsByText:true});
+			$('.click-to-edit-selects, .click-to-edit-delete').clickToEdit({matchOptionsByText:true});
 		});
 	</script>
 </body>

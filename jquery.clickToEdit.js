@@ -61,7 +61,7 @@
 		var options = this.options;
 		if (this.displayHasChildren) {
 			var display = this.display;
-			this.edit.find('input').not('[type=hidden]').each(function (index, item) {
+			this.edit.find('input[type=text], textarea').not('[type=hidden]').each(function (index, item) {
 				var currentDisplay = display.find('[data-name=' + item.name + ']');
 				$(item).val(currentDisplay.text());
 			});
@@ -83,7 +83,7 @@
 		}
 		else {
 			var nameSelector = '[name="' + this.display.data('name') + '"]';
-			this.edit.find('input' + nameSelector).val(this.display.text());
+			this.edit.find('input[type=text], textarea' + nameSelector).val(this.display.text());
 			
 			if(options.matchOptionsByText){
 				var matchedOption = currentItem.find('option').filter(function(){
@@ -140,7 +140,7 @@
 		if (this.displayHasChildren) {
 			var display = this.display;
 			var options = this.options;
-			this.edit.find('input').not('[type=hidden]').each(function (index, item) {
+			this.edit.find('input[type=text], textarea').each(function (index, item) {
 				var currentDisplay = display.find('[data-name=' + item.name + ']');
 				currentDisplay.text($(item).val());
 			});
@@ -158,7 +158,7 @@
 		}
 		else {
 			//display must contain only a single item
-			var editItem = this.edit.find('input,select').not('[type=hidden]').first();
+			var editItem = this.edit.find('input[type=text], textarea, select').first();
 			
 			if(editItem.is('input') || (editItem.is('select') && !this.options.matchOptionsByText)) {
 				this.display.text(editItem.val());

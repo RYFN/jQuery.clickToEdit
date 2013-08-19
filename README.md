@@ -74,8 +74,25 @@ Finally, you can change the behaviour of select items. By default, if you have a
 	});
 
 
-This works well with .Net MVC4 helper classes, and unobtrusive validation...
+This works well with .Net MVC4 helper classes, and unobtrusive validation, for example, given a `Model` containing a list of arbitrary items...
 
+	<ol>
+    @foreach (var item in Model)
+    {
+        <li class="click-to-edit">
+            <div class="display" data-name="Description">@Html.DisplayFor(modelItem => item.Description)</div>
+                @using (@Html.BeginForm("Edit", "Item", FormMethod.Post, new { @class="edit" }))
+                { 
+                    @Html.Hidden("ItemId", item.ItemId)
+                    @Html.TextBox("Description", "");
+                    <button type="submit">save</button>
+					<button type="button" class="cancel">cancel</button>
+                }
+        </li>
+    }
+	</ol>
+
+This will work in conjunction with client-side MVC4 unobtrusive form validation.
 
  
 ## TODO: ##
