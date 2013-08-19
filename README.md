@@ -66,7 +66,8 @@ If you provide a form with class `remove` inside your edit container, the elemen
 		      <button type="button" class="cancel">cancel</button>
 		    </form>
 			<form class="remove" action="/remove/me/" method="post">
-		      <button type="submit">remove</button>
+				<input type="hidden" name="SomethingId"/>
+		      	<button type="submit">remove</button>
 		    </form>
 		</div>
 	</div>
