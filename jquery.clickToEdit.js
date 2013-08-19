@@ -1,6 +1,6 @@
 /*
 // Click To Edit
-// v0.13
+// v1.0
 // 16/08/2013 
 // Ryan French
 */
