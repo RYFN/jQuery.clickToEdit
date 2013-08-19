@@ -2,15 +2,15 @@
 
 Will show and `edit` form on click of `display` element, and `$.ajax data` to the action of the `edit` form.
 
-Invoke on a container that contains an item with class `display`, and a form that has class `edit`. 
+Invoke on a container that contains an item with class `display`, and a form that has class `edit`, 
 or alternatively, any element with class `edit` containing multiple forms.
-`display` should contain items whose data-name attributes match the name attributes of inputs in the edit form,
+`display` should contain elements whose data-name attributes match the name attributes of inputs in the edit form,
 or alternatively contain no child elements, and have the data-name attribute on itself.
 
 `edit` should contain a button with class `cancel`.
 
 
-> **NOTE:** It will ignore hidden fields, and currently only works with inputs. (not selects, checkboxes, etc)
+> **NOTE:** It will ignore hidden fields, and only works with inputs of type "text", textareas, and selects.
 
 e.g:
 
@@ -52,6 +52,26 @@ OR:
 
 >By default, select fields will be matched by value, you can change this with the `matchOptionsByText` option, if you want your values to be different to your displayed item.
 
+If you provide a form with class `remove` inside your edit container, the element on which `clickToEdit` was invoked will get automatically removed upon successful post of the `remove` form.
+
+	<div class="click-to-edit">
+	    <div class="display">
+	      	<span data-name="Something">initial value</span>
+	    </div>
+		<div class="edit">
+		    <form action="/what/ever/" method="post">
+		      <input type="hidden" name="SomethingId"/>
+		      <input type="text" name="Something"/>
+		      <button type="submit">update</button>
+		      <button type="button" class="cancel">cancel</button>
+		    </form>
+			<form class="remove" action="/remove/me/" method="post">
+		      <button type="submit">remove</button>
+		    </form>
+		</div>
+	</div>
+
+> Check out the demos folder for more examples.
 
 Optionally add a postSuccess or postFail function, which are invoked after successful or failing ajaxy call,
 where 'element' is the element clickToEdit was initially called on.
@@ -59,7 +79,7 @@ where 'element' is the element clickToEdit was initially called on.
     myPostSuccess = function(element, data){};
     myPostFail = function(element, jqXHR, text, errThrown){};
 
-Also you can provide a "confirm remove" function, which should return true or false, and is called when a button of type "submit" is clicked in a form with class "remove".
+You can also provide a "confirm remove" function, which should return true or false, and is called when a button of type `submit` is clicked in a form with class `remove`.
 
     myConfirmRemove = function(element){ return true | false };
 
@@ -93,7 +113,3 @@ This works well with .Net MVC4 helper classes, and unobtrusive validation, for e
 	</ol>
 
 This will work in conjunction with client-side MVC4 unobtrusive form validation.
-
- 
-## TODO: ##
-Support for checkboxes / radio button lists?

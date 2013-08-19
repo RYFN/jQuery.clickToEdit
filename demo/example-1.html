@@ -76,6 +76,7 @@
 		</div>
 		
 		<h2>Removing row on delete</h2>
+		<p>A "confirm remove" function is provided to clickToEdit via the confirmRemove option.</p>
 		 <div class="click-to-edit-delete">
 			<div class="display">
 			  <span data-name="Something">initial value</span>
@@ -102,8 +103,8 @@
 				</form>
 			</div>
 		</div>
-		
 	</div>
+	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="jquery.mockjax.js"></script>
     <script type="text/javascript" src="../jquery.clickToEdit.js"></script>
@@ -119,7 +120,11 @@
 	
 		$(function(){
 			$('.click-to-edit').clickToEdit();
-			$('.click-to-edit-selects, .click-to-edit-delete').clickToEdit({matchOptionsByText:true});
+			$('.click-to-edit-selects').clickToEdit({matchOptionsByText:true});
+			
+			$('.click-to-edit-delete').clickToEdit({matchOptionsByText:true, confirmRemove:function(){
+				return confirm('Are you sure you want to remove this?');
+			}});
 		});
 	</script>
 </body>
