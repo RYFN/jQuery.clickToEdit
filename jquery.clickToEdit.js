@@ -57,7 +57,7 @@
         this.$element.on('click', 'form.remove button[type="submit"]', removeClick);
 
         //does the display element have multiple things in it, or is it a single element just showing one piece of text?
-        this.displayHasChildren = this.display.data("name") === null && this.display.find('[data-name]').length > 0;
+        this.displayHasChildren = typeof(this.display.data("name")) === 'undefined' && this.display.find('[data-name]').length > 0;
     };
 	
 	ClickToEdit.prototype.editMode = function() {
