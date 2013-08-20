@@ -30,6 +30,22 @@
 			</form>
 		</div>
 		
+		<h2>Single editable dropdown</h2>
+		 <div class="click-to-edit">
+			<div class="display" data-name="Something">some value</div>
+			<form class="edit" action="/dummy/url" method="post">
+			  <input type="hidden" name="SomethingId"/>
+			  <select name="Something">
+				<option value="Value 1">Value 1</option>
+				<option value="some value">some value</option>
+				<option value="something else">something else</option>
+			  </select>
+
+			  <button type="submit">update</button>
+			  <button type="button" class="cancel">cancel</button>
+			</form>
+		</div>
+		
 		<h2>Multiple editable fields</h2>
 		 <div class="click-to-edit">
 			<div class="display">

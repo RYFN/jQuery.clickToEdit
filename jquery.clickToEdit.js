@@ -6,6 +6,7 @@
 */
 
 ;(function ($) {
+	"use strict";
     // Create the defaults once
     var pluginName = 'clickToEdit',
         defaults = {
@@ -18,12 +19,15 @@
     // The actual plugin constructor
     function ClickToEdit(element, options) {
         this.element = element;
-		this.$element, this.display,this.edit,this.displayHasChildren;
+		this.$element = null;
+		this.display = null;
+		this.edit = null;
+		this.displayHasChildren = null;
         this.options = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
-    };
+    }
 
     ClickToEdit.prototype.init = function () {
         this.$element = $(this.element);
@@ -31,12 +35,12 @@
         //this allows us to put the data-name attribute directly on the .display element, without the need for a child element.
         this.displayHasChildren = false;
         this.edit = this.$element.find('.edit');
-        	
-        if (this.display.length == 0) {
+      
+        if (this.display.length === 0) {
             throw { name: 'missing display element', message: 'display element is missing - you need an element with the class "display" as a child of the element you invoked clickToEdit on' };
         }
 
-        if (this.edit.length == 0) {
+        if (this.edit.length === 0) {
             throw { name: 'missing edit element', message: 'edit element is missing - you need an element with the class "edit" as a child of the element you invoked clickToEdit on' };
         }
 
@@ -53,7 +57,7 @@
         this.$element.on('click', 'form.remove button[type="submit"]', removeClick);
 
         //does the display element have multiple things in it, or is it a single element just showing one piece of text?
-        this.displayHasChildren = this.display.data("name") == null && this.display.find('[data-name]').length > 0;
+        this.displayHasChildren = this.display.data("name") === null && this.display.find('[data-name]').length > 0;
     };
 	
 	ClickToEdit.prototype.editMode = function() {
@@ -83,16 +87,26 @@
 		}
 		else {
 			var nameSelector = '[name="' + this.display.data('name') + '"]';
-			this.edit.find('input[type=text], textarea' + nameSelector).val(this.display.text());
-			
-			if(options.matchOptionsByText){
-				var matchedOption = currentItem.find('option').filter(function(){
-						return $(this).text() === this.display.text();
-					});
-				this.edit.find('select' + nameSelector).val(matchedOption.val());
+			var editItem = this.edit.find('input[type=text], textarea' + nameSelector);
+			if(editItem.length === 1)
+			{
+				editItem.val(this.display.text());
 			}
-			else {
-				this.edit.find('select' + nameSelector).val(this.display.text());
+			else
+			{
+				var selectItem = this.edit.find('select' + nameSelector);
+				if(selectItem.length === 1)
+				{
+					if(options.matchOptionsByText){
+						var matchedOption = selectItem.find('option').filter(function(){
+								return $(this).text() === this.display.text();
+							});
+						this.edit.find('select' + nameSelector).val(matchedOption.val());
+					}
+					else {
+						this.edit.find('select' + nameSelector).val(this.display.text());
+					}
+				}
 			}
 		}
 
@@ -127,7 +141,7 @@
 	};
 
 	ClickToEdit.prototype.removeClick = function(e) {
-		if (this.options.confirmRemove != null && $.isFunction(this.options.confirmRemove)) {
+		if (this.options.confirmRemove !== null && $.isFunction(this.options.confirmRemove)) {
 			if (!this.options.confirmRemove(this.$element))
 			{
 				e.preventDefault();
@@ -172,7 +186,7 @@
 		this.edit.hide();
 		this.display.show();
 
-		if (this.options.postSuccess != null && $.isFunction(this.options.postSuccess)) {
+		if (this.options.postSuccess !== null && $.isFunction(this.options.postSuccess)) {
 			this.options.postSuccess(this.$element, data);
 		}
 	};
@@ -180,13 +194,13 @@
 	ClickToEdit.prototype.removeSuccess = function(data) {
 		this.$element.remove();
 
-		if (this.options.postSuccess != null && $.isFunction(this.options.postSuccess)) {
+		if (this.options.postSuccess !== null && $.isFunction(this.options.postSuccess)) {
 			this.options.postSuccess(this.$element, data);
 		}
 	};
 
 	ClickToEdit.prototype.ajaxError = function(jqXHR, text, errThrown) {
-		if (this.options.postFail != null && $.isFunction(this.options.postFail)) {
+		if (this.options.postFail !== null && $.isFunction(this.options.postFail)) {
 			this.options.postFail(this.$element, jqXHR, text, errThrown);
 		}
 	};
