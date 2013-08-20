@@ -1,0 +1,22 @@
+{
+  "name": "jquery.clickToEdit",
+  "version": "1.0.0",
+  "description": "jQuery click to edit plugin",
+  "main": "jquery.clickToEdit.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://qxfn@bitbucket.org/qxfn/jquery-click-to-edit.git"
+  },
+  "keywords": [
+    "jQuery"
+  ],
+  "author": "Ryan French",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+	"grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2"
+  }
+}
