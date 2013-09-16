@@ -3,6 +3,8 @@
 ####TL;DR
 This plugin displays a hidden form with the class `edit` on click of corresponding element with the class `display`. Form data is then `$.ajax data` to the action of the `edit` form.
 
+check out the demo folder, or the **[Wiki](https://github.com/RYFN/jQuery.clickToEdit/wiki/Detailed-Examples)**.
+
 ####Basic HTML structure
 	<div class="click-to-edit">
 	    <h2 class="display" data-name="Something">Something</h2>
