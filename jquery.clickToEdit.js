@@ -78,7 +78,7 @@
 			var display = this.display;
 			this.edit.find('input[type=text], textarea').not('[type=hidden]').each(function (index, item) {
 				var currentDisplay = display.find('[data-name=' + item.name + ']');
-				$(item).val(currentDisplay.text());
+				$(item).val($.trim(currentDisplay.text()));
 			});
 			
 			//same again, but for select items
@@ -89,13 +89,13 @@
 				//depending on config, match a select option by it's text, rather than value
 				if(options.matchOptionsByText){
 					var matchedOption = currentItem.find('option').filter(function(){
-						return $(this).text() === currentDisplay.text();
+						return $(this).text() === $.trim(currentDisplay.text());
 					});
 					
 					currentItem.val(matchedOption.val());
 				}
 				else{
-					$(item).val(currentDisplay.text());
+					$(item).val($.trim(currentDisplay.text()));
 				}
 			});
 		}
@@ -108,7 +108,7 @@
 			//updated text inputs
 			if(editItem.length === 1)
 			{
-				editItem.val(this.display.text());
+				editItem.val($.trim(this.display.text()));
 			}
 			else
 			{
@@ -119,12 +119,12 @@
 					//depending on config, match a select option by it's text, rather than value
 					if(options.matchOptionsByText){
 						var matchedOption = selectItem.find('option').filter(function(){
-								return $(this).text() === this.display.text();
+								return $(this).text() === $.trim(this.display.text());
 							});
 						this.edit.find('select' + nameSelector).val(matchedOption.val());
 					}
 					else {
-						this.edit.find('select' + nameSelector).val(this.display.text());
+						this.edit.find('select' + nameSelector).val($.trim(this.display.text()));
 					}
 				}
 			}
